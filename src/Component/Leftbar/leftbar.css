@@ -1,0 +1,33 @@
+.leftbarMainContainer{
+  flex: 0.7;
+  background-color: rgb(104, 104, 226);
+  
+}
+
+.logoname{
+  color: white;
+  margin-left: 2rem;
+
+}
+
+.menu{
+  color: rgb(240, 232, 232);
+  margin-left: 2rem;
+}
+
+li{
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.liListName{
+  color: #cccc;
+  margin-left: 2rem;
+  margin-right: 10px;
+}
+
+.listicons{
+  width: 20px;
+  height: 20px;
+}
