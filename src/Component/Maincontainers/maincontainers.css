@@ -82,20 +82,9 @@ input {
   font-weight: bold;
 }
 
-.AnimeTittleJpn{
-}
-
-.AnimeImage{
-
-}
-
 .AnimeEpisode{
   color: blue;
   font-weight: bold;
-}
-
-.AnimeDuration{
-
 }
 
 .AnimeScore{
@@ -114,4 +103,32 @@ input {
   margin-bottom: 10px;
   margin-top: 10px;
   cursor:pointer;
+}
+
+.AnimeWrapperDet{
+  margin: 20px;
+  width: auto;
+  background-color: antiquewhite;
+  color: black;
+  text-align: center;
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.AnimeTittleDet{
+  font-weight: bold;
+  font-size:xx-large;
+}
+
+.AnimeEpisodeDet{
+  color: blue;
+  font-weight: bold;
+}
+
+
+.AnimeSynopsisDet{
+  padding: 20px;
+  color: green;
+  font-style: italic;
 }

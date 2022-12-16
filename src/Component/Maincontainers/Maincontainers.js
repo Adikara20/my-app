@@ -3,10 +3,22 @@ import notificationicon from "../../Icons/notification.png"
 import profileimage from "../../Images/pexels-marlene-leppänen-1183266.jpg"
 import searchicon from "../../Icons/search.png"
 import "./maincontainers.css"
-import { getAnimeList,searchAnime } from '../../Service/Service'
+import { detailAnime, getAnimeList,searchAnime } from '../../Service/Service'
 
 export default function Maincontainers() {
   const [popularAnime, setPopularAnime] = useState([])
+  const [isShown, setIsShown] = useState(false);
+  const [detailxs, setPopularAnimeDetail] = useState();
+
+  const handleClick = (param) => {
+    setIsShown(current => !current);
+    //console.log(event)
+    //setParam(param)
+    console.log("sini")
+    detail(param)
+  };
+
+  //console.log({isParam: isParam})
 
   useEffect(() => {
     //setPopularAnime(getAnimeList())
@@ -15,7 +27,7 @@ export default function Maincontainers() {
     })
   }, [])
 
-  console.log({popularAnimess: popularAnime.data})
+  //console.log({popularAnimess: popularAnime.data})
 
   const PopularAnimesList = () => {
     return popularAnime.data?.map((anime) => {
@@ -27,7 +39,9 @@ export default function Maincontainers() {
           <div className='AnimeEpisode'>Episode : {anime.episodes}</div>
           <div className='AnimeDuration'>Duration : {anime.duration}</div>
           <div className='AnimeScore'>Score : {anime.score}</div>
-          <button className='ButtonWath'> Watch Trailer</button>
+          <button className='ButtonWath' onClick={event => handleClick(event, anime.mal_id)}>
+            Watch Trailer
+          </button>
         </div>
       )
     })
@@ -37,13 +51,20 @@ export default function Maincontainers() {
     if(q.length > 3){
       const query = await searchAnime(q)
       setPopularAnime(query)
-      console.log({queryy : query})
+      //console.log({query : query})
     } else if(q.length === 0){
       getAnimeList().then((results) => {
         setPopularAnime(results)
       })
     }
   }
+
+  const detail = async (q) => {
+      const datas = await detailAnime(q)
+      console.log({querydatas : datas})
+      setPopularAnimeDetail(datas)
+  }
+
 
   return (
     <div className='mainContainer'>
@@ -65,6 +86,19 @@ export default function Maincontainers() {
             </div>
         </div>
       </div>
+      {isShown && detailxs !== undefined && (
+        <div>
+          <div className='AnimeWrapperDet'>
+            <div className='AnimeTittleDet'>{detailxs.title}</div>
+            <div className='AnimeTittleJpnDet'>{detailxs.title_japanese}</div>
+            <iframe height="480" width="720" src={detailxs.trailer.embed_url}></iframe>
+            <div className='AnimeEpisodeDet'>Episode : {detailxs.episodes}</div>
+            <div className='AnimeDurationDet'>Duration : {detailxs.duration}</div>
+            <div className='AnimeSynopsisDet'>Synopsis : {detailxs.synopsis}</div>
+          </div>
+        </div>
+      )}
+      {isShown}
       <div className='AnimeContainer'>
         <PopularAnimesList/>
       </div>
